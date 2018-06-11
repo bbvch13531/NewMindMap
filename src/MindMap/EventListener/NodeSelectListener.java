@@ -66,17 +66,6 @@ public class NodeSelectListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        // attributePane을 업데이트한다.
-//        System.out.printf("%d %d\n",mindMapPane.getX(),mindMapPane.getY());
-//        System.out.printf("%d %d\n",e.getX(),e.getY());
-//        int xlocate = MouseInfo.getPointerInfo().getLocation().x;
-//        int ylocate = MouseInfo.getPointerInfo().getLocation().y;
-//
-//        System.out.printf("%d %d\n",xlocate,ylocate);
-//        attributePane.setSelectedNode(selectedNode);
-
-        /*여기까지 내 코드*/
-
         index = getIndex(e);
         if(index!=-1) {
             System.out.println("DRAW >> " + labelArray.get(index).getText());
@@ -95,12 +84,10 @@ public class NodeSelectListener extends MouseAdapter {
             if (labelArray.get(index) == e.getSource())
                 entered = true;
             else {
-//                System.out.println("Mouse exited");
                 entered = false;
             }
         }
         else {
-            System.out.println("Mouse exited");
             entered = false;
         }
     }
@@ -121,7 +108,8 @@ public class NodeSelectListener extends MouseAdapter {
         xPos = selectedLabel.getX() + distanceX;
         yPos = selectedLabel.getY() + distanceY;
 
-        attributePane.setSelectedNode(selectedNode);
+        if(!entered) attributePane.clearTextFields();
+        else attributePane.setSelectedNode(selectedNode);
 
         System.out.println(dragging);
         int selectedLabelX,selectedLabelY,selectedLabelHeight,selectedLabelWidth;
@@ -228,7 +216,6 @@ public class NodeSelectListener extends MouseAdapter {
     }
 
     public void mouseMoved(MouseEvent e) {
-        System.out.println("Mouse Moved");
         index=getIndex(e);
         if(index!=-1) {
             selectedLabel = labelArray.get(index);
@@ -263,7 +250,6 @@ public class NodeSelectListener extends MouseAdapter {
         }
         if (!entered) {
             mindMapPane.setCursor(Cursor.getDefaultCursor());
-            System.out.println("Set Default Cursor");
         }
     }
 

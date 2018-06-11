@@ -42,7 +42,14 @@ public class AttributePane extends JPanel {
         heightVal.setText(String.valueOf(ssn.getHeight()));
         widthVal.setText(String.valueOf(ssn.getWidth()));
         colorVal.setText(String.valueOf(ssn.getColor()));
-
+    }
+    public void clearTextFields(){
+        nameVal.setText(null);
+        xVal.setText(null);
+        yVal.setText(null);
+        heightVal.setText(null);
+        widthVal.setText(null);
+        colorVal.setText(null);
     }
     void AddName(){
         name = new JLabel("Text");
