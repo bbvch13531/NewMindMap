@@ -1,5 +1,6 @@
 package MindMap;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Node {
@@ -10,6 +11,7 @@ public class Node {
         child = new ArrayList<>();
         nodeArray = new ArrayList<>();
     }
+
     Node(String text){
         this.text = text;
         child = new ArrayList<>();

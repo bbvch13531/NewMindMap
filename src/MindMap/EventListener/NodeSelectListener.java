@@ -34,8 +34,19 @@ public class NodeSelectListener extends MouseAdapter {
         nodeArray = root.getNodeArray();
     }
 
-    public void UpdateNode(Node node){
-        this.selectedNode = node;
+    public void UpdateNode(Node node,JLabel label){
+//        this.selectedNode = node;
+        node.setX(label.getX());
+        node.setY(label.getY());
+        node.setHeight(label.getHeight());
+        node.setWidth(label.getWidth());
+//        this.selectedNode.setX(node.getX());
+//        this.selectedNode.setY(node.getY());
+//        this.selectedNode.setHeight(node.getHeight());
+//        this.selectedNode.setWidth(node.getWidth());
+//        this.selectedNode.setColor(node.getColor());
+        // tree Model의 Node를 업데이트
+        attributePane.setSelectedNode(node,label);
     }
 
     public void mousePressed(MouseEvent e){
@@ -69,11 +80,15 @@ public class NodeSelectListener extends MouseAdapter {
         index = getIndex(e);
         if(index!=-1) {
             System.out.println("DRAW >> " + labelArray.get(index).getText());
+
             if (entered) {
 
                 selectedNode = nodeArray.get(index);
-                attributePane.setSelectedNode(selectedNode);
+                // 이 부분에서 안넘어가는 것 같다.
+                attributePane.setSelectedNode(selectedNode,labelArray.get(index));
                 //선택된 JLabel에 해당하는 Node를 Attribute에 전달.
+                System.out.print("mouseClicked  ");
+                System.out.printf("%s %d %d\n",selectedNode.getText(),selectedNode.getX(),selectedNode.getY());
             }
         }
     }
@@ -90,6 +105,7 @@ public class NodeSelectListener extends MouseAdapter {
         else {
             entered = false;
         }
+        System.out.printf("mouse entered : %s\n",entered);
     }
     public void mouseExited(MouseEvent e) {
     }
@@ -97,7 +113,6 @@ public class NodeSelectListener extends MouseAdapter {
     public void mouseDragged(MouseEvent e) {
 
         index = getIndex(e);
-
 
         int distanceX = e.getX() - x;
         int distanceY = e.getY() - y;
@@ -109,9 +124,9 @@ public class NodeSelectListener extends MouseAdapter {
         yPos = selectedLabel.getY() + distanceY;
 
         if(!entered) attributePane.clearTextFields();
-        else attributePane.setSelectedNode(selectedNode);
+        else attributePane.setSelectedNode(selectedNode,selectedLabel);
 
-        System.out.println(dragging);
+
         int selectedLabelX,selectedLabelY,selectedLabelHeight,selectedLabelWidth;
         selectedLabelX = selectedLabel.getX();
         selectedLabelY = selectedLabel.getY();
@@ -135,7 +150,7 @@ public class NodeSelectListener extends MouseAdapter {
                         selectedLabel.setBounds(selectedLabelX, selectedLabelY + 1,
                                 selectedLabelWidth, selectedLabelHeight - 1);
                     }
-                    System.out.println("Cursor N");
+//                    System.out.println("Cursor N");
                     break;
                 case Cursor.NW_RESIZE_CURSOR:
                     if (e.getY() < 2 && e.getX() < 2) {
@@ -146,7 +161,7 @@ public class NodeSelectListener extends MouseAdapter {
                         selectedLabel.setBounds(selectedLabelX + 1, selectedLabelY + 1,
                                 selectedLabelWidth - 1, selectedLabelHeight - 1);
                     }
-                    System.out.println("Cursor NW");
+//                    System.out.println("Cursor NW");
                     break;
                 case Cursor.W_RESIZE_CURSOR:
                     if (e.getX() < 3) {
@@ -156,7 +171,7 @@ public class NodeSelectListener extends MouseAdapter {
                         selectedLabel.setBounds(selectedLabelX + 1, selectedLabelY,
                                 selectedLabelWidth - 1, selectedLabelHeight);
                     }
-                    System.out.println("Cursor W");
+//                    System.out.println("Cursor W");
                     break;
                 case Cursor.SW_RESIZE_CURSOR:
                     if (e.getX() < 3 && e.getY() > selectedLabelHeight - 3) {
@@ -166,7 +181,7 @@ public class NodeSelectListener extends MouseAdapter {
                         selectedLabel.setBounds(selectedLabelX + 1, selectedLabelY,
                                 selectedLabelWidth - 1, selectedLabelHeight - 1);
                     }
-                    System.out.println("Cursor SW");
+//                    System.out.println("Cursor SW");
                     break;
                 case Cursor.S_RESIZE_CURSOR:
                     if (e.getY() > selectedLabelHeight - 3) {
@@ -176,7 +191,7 @@ public class NodeSelectListener extends MouseAdapter {
                         selectedLabel.setBounds(selectedLabelX, selectedLabelY,
                                 selectedLabelWidth, selectedLabelHeight - 1);
                     }
-                    System.out.println("Cursor S");
+//                    System.out.println("Cursor S");
                     break;
                 case Cursor.SE_RESIZE_CURSOR:
                     if (e.getX() > selectedLabelWidth - 3 && e.getY() > selectedLabelHeight - 3) {
@@ -186,7 +201,7 @@ public class NodeSelectListener extends MouseAdapter {
                         selectedLabel.setBounds(selectedLabelX, selectedLabelY,
                                 selectedLabelWidth - 1, selectedLabelHeight - 1);
                     }
-                    System.out.println("Cursor SE");
+//                    System.out.println("Cursor SE");
                     break;
                 case Cursor.E_RESIZE_CURSOR:
                     if (e.getX() > selectedLabelWidth - 3) {
@@ -196,7 +211,7 @@ public class NodeSelectListener extends MouseAdapter {
                         selectedLabel.setBounds(selectedLabelX, selectedLabelY,
                                 selectedLabelWidth - 1, selectedLabelHeight);
                     }
-                    System.out.println("Cursor E");
+//                    System.out.println("Cursor E");
                     break;
                 case Cursor.NE_RESIZE_CURSOR:
                     if (e.getX() > selectedLabelWidth - 3 && e.getY() < 3) {
@@ -206,10 +221,10 @@ public class NodeSelectListener extends MouseAdapter {
                         selectedLabel.setBounds(selectedLabelX, selectedLabelY + 1,
                                 selectedLabelWidth - 1, selectedLabelHeight - 1);
                     }
-                    System.out.println("Cursor NE");
+//                    System.out.println("Cursor NE");
                     break;
                 default:
-                    System.out.println("unexpected type: " + type);
+//                    System.out.println("unexpected type: " + type);
             }
             mindMapPane.repaint();
         }
@@ -254,11 +269,13 @@ public class NodeSelectListener extends MouseAdapter {
     }
 
     public int getIndex(MouseEvent e){
+
         for (int i = 0; i < labelArray.size(); i++) {
             if (labelArray.get(i) == e.getSource()) {
                 return i;
             }
         }
+
         return 1;
     }
 }

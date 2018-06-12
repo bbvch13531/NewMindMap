@@ -31,17 +31,23 @@ public class AttributePane extends JPanel {
         modifyBtnListener.UpdateBtnListener(this,mindMapPane,selectedNode);
         modifyBtn.addActionListener(modifyBtnListener);
     }
-    public void setSelectedNode(Node ssn){
+    public void setSelectedNode(Node ssn,JLabel label){
         this.selectedNode = ssn;
         modifyBtnListener.UpdateBtnListener(this,mindMapPane,selectedNode);
 //        JLabel target = (JLabel) obj;
 //        System.out.printf("%s",node.getText());
         nameVal.setText(String.valueOf(ssn.getText()));
+
         xVal.setText(String.valueOf(ssn.getX()));
         yVal.setText(String.valueOf(ssn.getY()));
         heightVal.setText(String.valueOf(ssn.getHeight()));
         widthVal.setText(String.valueOf(ssn.getWidth()));
         colorVal.setText(String.valueOf(ssn.getColor()));
+
+        ssn.setX(label.getX());
+        ssn.setY(label.getY());
+        ssn.setHeight(label.getHeight());
+        ssn.setWidth(label.getWidth());
     }
     public void clearTextFields(){
         nameVal.setText(null);
@@ -55,6 +61,8 @@ public class AttributePane extends JPanel {
         name = new JLabel("Text");
         nameVal = new JTextField();
         nameVal.setBackground(Color.LIGHT_GRAY);
+        nameVal.setForeground(Color.BLUE);
+        nameVal.setEditable(false);
         add(name);
         add(nameVal);
     }

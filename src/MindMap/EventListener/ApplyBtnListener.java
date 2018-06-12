@@ -74,6 +74,7 @@ public class ApplyBtnListener implements ActionListener{
             }
         }
         Gson gson = new Gson();
+        System.out.println(nodeTreeModel);
         String json = gson.toJson(nodeTreeModel);
         System.out.println(mindMapPane);
 
