@@ -15,7 +15,6 @@ import javax.swing.*;
 
 public class MenuToolListener implements ActionListener {
     static boolean isSaved = false;
-    static String content = "";
     FileDialog mSave;
     FileDialog mOpen;
 

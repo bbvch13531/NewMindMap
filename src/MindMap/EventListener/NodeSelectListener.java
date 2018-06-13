@@ -3,7 +3,6 @@ package MindMap.EventListener;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -34,7 +33,6 @@ public class NodeSelectListener extends MouseAdapter {
     }
 
     public void UpdateNode(Node node,JLabel label){
-//        this.selectedNode = node;
         node.setX(label.getX());
         node.setY(label.getY());
         node.setHeight(label.getHeight());
@@ -76,7 +74,6 @@ public class NodeSelectListener extends MouseAdapter {
             temporaryColor = stringRed + stringGreen + stringBlue;
             temporaryColor = getColorHex(temporaryColor);
             selectedLabel.setBackground(Color.decode(temporaryColor));
-//            System.out.println(mindMapPane.getCursor());
         }
     }
 
