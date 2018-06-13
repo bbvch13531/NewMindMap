@@ -1,5 +1,6 @@
 package MindMap.EventListener;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -42,13 +43,13 @@ public class ApplyBtnListener implements ActionListener{
 
             } catch (Exception exception){
                 System.err.print("lineOffset Exception");
+                break;
             }
-            data.setColor("0xffffff");
+            data.setColor("0xff99cc");
             data.setX(i*50);
             data.setY(i*100);
             data.setHeight(30);
             data.setWidth(50);
-
 
             if(!rawText.contains("\t")){
                 nodeTreeModel.setRoot(data);
@@ -73,16 +74,37 @@ public class ApplyBtnListener implements ActionListener{
                 nodeTreeModel.increaseSize();
             }
         }
-        Gson gson = new Gson();
-        System.out.println(nodeTreeModel);
-        String json = gson.toJson(nodeTreeModel);
-        System.out.println(mindMapPane);
+
+        int MaxDepth = 0 , compareDepth = 0;
+        Node root = nodeTreeModel.getRoot();
+        ArrayList<Node> nodeArray = root.getNodeArray(root);
+
+        for(int i=0;i<nodeArray.size();i++){
+            compareDepth = nodeArray.get(i).getDepth();
+            if(MaxDepth < compareDepth){
+                MaxDepth = compareDepth;
+            }
+        }
+
+        String[] s = new String[MaxDepth+1];
+        for(int i = 0; i <= MaxDepth; i++){
+            String decodeColor = "0x";
+            double randRed = Math.random()*225+17;
+            double randGreen = Math.random()*225+17;
+            double randBlue = Math.random()*225+17;
+            s[i] = decodeColor+Integer.toHexString((int)randRed)+Integer.toHexString((int)randGreen)+Integer.toHexString((int)randBlue);
+            System.out.println(s[i].toString());
+        }
+        for(int i=0;i<nodeArray.size(); i++) {
+            for (int j = 0; j <= MaxDepth; j++) {
+                if (nodeArray.get(i).getDepth() == j)
+                    nodeArray.get(i).setColor(s[j].toString());
+            }
+        }
 
         mindMapPane.updateNodeTreeModel(nodeTreeModel);
         mindMapPane.draw();
 //        System.out.println(json);
 
-
     }
-
 }

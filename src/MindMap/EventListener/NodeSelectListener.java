@@ -31,7 +31,7 @@ public class NodeSelectListener extends MouseAdapter {
         labelArray = mindMapPane.labelArray;
         this.selectedNode = null;
         this.root = mmp.nodeTreeModel.getRoot();
-        nodeArray = root.getNodeArray();
+        nodeArray = root.getNodeArray(root);
     }
 
     public void UpdateNode(Node node,JLabel label){
@@ -50,10 +50,13 @@ public class NodeSelectListener extends MouseAdapter {
     }
 
     public void mousePressed(MouseEvent e){
+        String prevColor ="", temporaryColor="";
+        String stringRed, stringGreen, stringBlue;
+        int red , green, blue;
+
         x = e.getX();
         y = e.getY();
         index = 0;
-
         index = getIndex(e);
         if(index!=-1) {
             if (labelArray.get(index) == e.getSource())
@@ -62,16 +65,36 @@ public class NodeSelectListener extends MouseAdapter {
                 selected = false;
             }
         }
+        if(entered) {
             if (mindMapPane.getCursor() != Cursor.getDefaultCursor()) { // draw.getCursor()
                 // If cursor is set for Test, allow dragging.
                 dragging = true;
             }
-
-            System.out.println(mindMapPane.getCursor());
+            selectedNode = nodeArray.get(index);
+            prevColor = selectedNode.getColor();
+            red = 255 - selectedLabel.getBackground().getRed();
+            green = 255 - selectedLabel.getBackground().getGreen();
+            blue = 255 - selectedLabel.getBackground().getBlue();
+            stringRed = getRGBHex(red);
+            stringGreen = getRGBHex(green);
+            stringBlue = getRGBHex(blue);
+            System.out.println(stringBlue);
+            temporaryColor = stringRed + stringGreen + stringBlue;
+            temporaryColor = getColorHex(temporaryColor);
+            selectedLabel.setBackground(Color.decode(temporaryColor));
+//            System.out.println(mindMapPane.getCursor());
+        }
     }
 
     public void mouseReleased(MouseEvent e) {
+        String prevColor ="", temporaryColor="";
+        String stringRed, stringGreen, stringBlue;
+        int red , green, blue;
         dragging = false;
+        if(entered) {
+            prevColor = selectedNode.getColor();
+            selectedLabel.setBackground(Color.decode(prevColor));
+        }
     }
 
     @Override
@@ -80,17 +103,20 @@ public class NodeSelectListener extends MouseAdapter {
         index = getIndex(e);
         if(index!=-1) {
             System.out.println("DRAW >> " + labelArray.get(index).getText());
-
             if (entered) {
-
                 selectedNode = nodeArray.get(index);
                 // 이 부분에서 안넘어가는 것 같다.
                 attributePane.setSelectedNode(selectedNode,labelArray.get(index));
                 //선택된 JLabel에 해당하는 Node를 Attribute에 전달.
                 System.out.print("mouseClicked  ");
+
+                selectedNode = nodeArray.get(index);
+
                 System.out.printf("%s %d %d\n",selectedNode.getText(),selectedNode.getX(),selectedNode.getY());
             }
+
         }
+
     }
 
     public void mouseEntered(MouseEvent e){
@@ -277,5 +303,26 @@ public class NodeSelectListener extends MouseAdapter {
         }
 
         return 1;
+    }
+    String getRGBHex(int rgb){
+        String color;
+        color = Integer.toHexString(rgb);
+        if(color.length() == 1){
+            color = "0"+color;
+        }
+        return color;
+    }
+    String getColorHex(String color){
+
+        if(color.length() == 4){
+            color = "0x00"+color;
+        }
+        else if(color.length() == 5){
+            color = "0x0" +color;
+        }
+        else if(color.length() == 6){
+            color = "0x"+color;
+        }
+        return color;
     }
 }
