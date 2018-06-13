@@ -1,6 +1,5 @@
 package MindMap;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class Node {
@@ -54,8 +53,6 @@ public class Node {
     }
 
     public ArrayList<Node> getNodeArray(Node node){
-//        return this.nodeArray;
-//        ArrayList<Node> returnArray = new ArrayList<>();
         if(nodeArray.size()!=0) return nodeArray;
         else {
             treeToArray(node, nodeArray);

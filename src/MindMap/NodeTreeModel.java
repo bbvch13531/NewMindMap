@@ -3,9 +3,7 @@ package MindMap;
 
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import java.util.ArrayList;
 
 public class NodeTreeModel implements TreeModel{
     Node root;

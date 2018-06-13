@@ -8,7 +8,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class AttributePane extends JPanel {
     MindMapPane mindMapPane;
@@ -19,9 +18,8 @@ public class AttributePane extends JPanel {
     JTextField xVal,yVal,heightVal,widthVal,colorVal,nameVal;
     JButton modifyBtn;
     ModifyBtnListener modifyBtnListener;
-    AttributePane(){
 
-//        modifyBtn = new JButton("변경");
+    AttributePane(){
         modifyBtnListener = new ModifyBtnListener(this,mindMapPane,selectedNode);
         setLayout(new GridLayout(7,1,0,15));
         AddName();
@@ -32,7 +30,6 @@ public class AttributePane extends JPanel {
         AddColor();
         AddButton();
         setBorder(new EmptyBorder(new Insets(0,0,0,0)));
-//        add(modifyBtn);
         setVisible(true);
     }
     public void AddMindMapPane(MindMapPane mmp){
@@ -40,12 +37,12 @@ public class AttributePane extends JPanel {
         modifyBtnListener.UpdateBtnListener(this,mindMapPane,selectedNode);
         modifyBtn.addActionListener(modifyBtnListener);
     }
+
     public ModifyBtnListener getModifyBtnListener(){ return this.modifyBtnListener;}
+
     public void setSelectedNode(Node ssn,JLabel label){
         this.selectedNode = ssn;
         modifyBtnListener.UpdateBtnListener(this,mindMapPane,selectedNode);
-//        JLabel target = (JLabel) obj;
-//        System.out.printf("%s",node.getText());
         nameVal.setText(String.valueOf(ssn.getText()));
 
         xVal.setText(String.valueOf(ssn.getX()));
@@ -157,7 +154,6 @@ public class AttributePane extends JPanel {
             convertColor = getColorHex(setColor);
             colorVal.setText(convertColor);
             System.out.println(convertColor);
-//    		colorVal.setBackground(Color.decode(convertColor));
         }
         String getRGBHex(int rgb){
             String color;

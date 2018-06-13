@@ -36,7 +36,6 @@ public class TextEditorPane extends JPanel {
         applyBtn.btn.addActionListener(applyBtnListener);
 
         Border border = BorderFactory.createLineBorder(Color.black, 5);
-//        this.setBorder(border);
         label.setBorder(border);
         label.setOpaque(true);
         label.setBackground(Color.YELLOW);

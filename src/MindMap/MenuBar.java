@@ -14,9 +14,9 @@ public class MenuBar extends JMenuBar{
         JMenu title = new JMenu("메뉴");
 
         for(int i = 0; i < menuItem.length; i++){
-            menuItem[i] = new JMenuItem(itemTitle[i]); // 메뉴아이템 생성
-            menuItem[i].addActionListener(menuToolListener); // 메뉴아이템에 액션 리스너 등록.
-            title.add(menuItem[i]);// 메뉴 아이템을 스크린 메뉴에 삽입
+            menuItem[i] = new JMenuItem(itemTitle[i]);
+            menuItem[i].addActionListener(menuToolListener);
+            title.add(menuItem[i]);
             if (i == menuItem.length - 1)
                 break;
             title.addSeparator();

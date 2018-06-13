@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.EventListener;
-import com.google.gson.Gson;
 import MindMap.*;
 
 import javax.swing.*;
@@ -27,9 +25,6 @@ public class ApplyBtnListener implements ActionListener{
         int depth=0,head=0,tail=0;
         String rawText= null;
         JTextArea textArea = textEditorPane.getTextArea();
-//        System.out.println(textArea.getText());
-        //        textArea의 string을 가지고와서 nodetreemodel을 만든다.
-//        System.out.println(nodeTreeModel.getRoot());
         for(int i=0; i<textArea.getLineCount();i++){
             depth=0;
             Node data = new Node();
@@ -104,7 +99,5 @@ public class ApplyBtnListener implements ActionListener{
 
         mindMapPane.updateNodeTreeModel(nodeTreeModel);
         mindMapPane.draw();
-//        System.out.println(json);
-
     }
 }

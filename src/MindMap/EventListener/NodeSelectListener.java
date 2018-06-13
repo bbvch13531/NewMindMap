@@ -5,10 +5,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.*;
 
 import MindMap.*;
-
-import javax.swing.*;
 
 public class NodeSelectListener extends MouseAdapter {
     AttributePane attributePane;
@@ -40,12 +39,7 @@ public class NodeSelectListener extends MouseAdapter {
         node.setY(label.getY());
         node.setHeight(label.getHeight());
         node.setWidth(label.getWidth());
-//        this.selectedNode.setX(node.getX());
-//        this.selectedNode.setY(node.getY());
-//        this.selectedNode.setHeight(node.getHeight());
-//        this.selectedNode.setWidth(node.getWidth());
-//        this.selectedNode.setColor(node.getColor());
-        // tree Model의 Node를 업데이트
+
         attributePane.setSelectedNode(node,label);
     }
 
@@ -87,9 +81,7 @@ public class NodeSelectListener extends MouseAdapter {
     }
 
     public void mouseReleased(MouseEvent e) {
-        String prevColor ="", temporaryColor="";
-        String stringRed, stringGreen, stringBlue;
-        int red , green, blue;
+        String prevColor ="";
         dragging = false;
         if(entered) {
             prevColor = selectedNode.getColor();
@@ -102,21 +94,12 @@ public class NodeSelectListener extends MouseAdapter {
 
         index = getIndex(e);
         if(index!=-1) {
-            System.out.println("DRAW >> " + labelArray.get(index).getText());
             if (entered) {
                 selectedNode = nodeArray.get(index);
-                // 이 부분에서 안넘어가는 것 같다.
                 attributePane.setSelectedNode(selectedNode,labelArray.get(index));
-                //선택된 JLabel에 해당하는 Node를 Attribute에 전달.
-                System.out.print("mouseClicked  ");
-
                 selectedNode = nodeArray.get(index);
-
-                System.out.printf("%s %d %d\n",selectedNode.getText(),selectedNode.getX(),selectedNode.getY());
             }
-
         }
-
     }
 
     public void mouseEntered(MouseEvent e){
@@ -131,7 +114,6 @@ public class NodeSelectListener extends MouseAdapter {
         else {
             entered = false;
         }
-        System.out.printf("mouse entered : %s\n",entered);
     }
     public void mouseExited(MouseEvent e) {
     }
