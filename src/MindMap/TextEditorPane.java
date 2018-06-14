@@ -30,7 +30,7 @@ public class TextEditorPane extends JPanel {
         this.mindMapPane = mmp;
         this.nodeTreeModel = ntm;
 
-        this.setBackground(Color.CYAN);
+        this.setBackground(Color.decode("0x6862e8"));
         this.setBorder(new EmptyBorder(new Insets(0,0,0,0)));
         applyBtnListener = new ApplyBtnListener(this, mindMapPane, nodeTreeModel);
         applyBtn.btn.addActionListener(applyBtnListener);
@@ -38,7 +38,7 @@ public class TextEditorPane extends JPanel {
         Border border = BorderFactory.createLineBorder(Color.black, 5);
         label.setBorder(border);
         label.setOpaque(true);
-        label.setBackground(Color.YELLOW);
+        label.setBackground(Color.decode("0x6862e8"));
 
         add(label,BorderLayout.NORTH);
         add(new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED),BorderLayout.CENTER);

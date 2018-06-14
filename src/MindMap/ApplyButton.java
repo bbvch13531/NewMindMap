@@ -12,7 +12,7 @@ public class ApplyButton extends JPanel {
     ApplyButton() {
         setLayout(new BorderLayout());
         btn = new JButton("적용");
-        btn.setBackground(Color.RED);
+        btn.setBackground(Color.decode("0xFFAA9A"));
         btn.setFont(new Font("a", Font.BOLD, 15));
         add(btn, BorderLayout.SOUTH);
         setVisible(true);

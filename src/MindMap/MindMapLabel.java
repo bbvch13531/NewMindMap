@@ -8,8 +8,8 @@ public class MindMapLabel extends JPanel{
         setLayout(new FlowLayout(FlowLayout.CENTER));
         JLabel label = new JLabel("Mind Map Pane");
         label.setFont(new Font("a", Font.PLAIN, 30));
-        label.setForeground(Color.white);
-        this.setBackground(Color.CYAN);
+        label.setForeground(Color.black);
+        this.setBackground(Color.decode("0x7997FF"));
 
         add(label,new FlowLayout(FlowLayout.CENTER));
         setVisible(true);

@@ -10,6 +10,7 @@ public class CenterPane extends JPanel{
         setLayout(new BorderLayout());
         MindMapLabel label = new MindMapLabel();
         Border border = BorderFactory.createLineBorder(Color.black, 3);
+        this.setBackground(Color.decode("0xeeeeee"));
         this.setBorder(new EmptyBorder(new Insets(0,0,0,0)));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         label.setBorder(border);

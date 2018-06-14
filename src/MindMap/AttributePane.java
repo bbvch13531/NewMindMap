@@ -22,6 +22,7 @@ public class AttributePane extends JPanel {
     AttributePane(){
         modifyBtnListener = new ModifyBtnListener(this,mindMapPane,selectedNode);
         setLayout(new GridLayout(7,1,0,15));
+        this.setBackground(Color.decode("0xeeeeee"));
         AddName();
         AddX();
         AddY();
